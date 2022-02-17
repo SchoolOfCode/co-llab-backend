@@ -13,12 +13,11 @@ const router = express.Router();
 //   });
 // });
 
-router.get("/users", function (req, res, next) {
+router.get("/", function (req, res, next) {
 	res.json({
 		success: true,
 		msg: "Hello hugs for bugs",
 	});
-	next();
 });
 
 export default router;
