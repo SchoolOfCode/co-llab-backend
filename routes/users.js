@@ -4,19 +4,12 @@ import { getAllUsers } from "../models/users.js";
 const router = express.Router();
 
 /* GET users listing. */
-// router.get("/", async function (req, res, next) {
-//   const users = await getAllUsers();
+router.get("/", async function (req, res, next) {
+	//const users = await getAllUsers();
 
-//   res.json({
-//     success: true,
-//     payload: users
-//   });
-// });
-
-router.get("/", function (req, res, next) {
 	res.json({
 		success: true,
-		msg: "Hello hugs for bugs",
+		payload: "Hello team",
 	});
 });
 
