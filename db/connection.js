@@ -3,10 +3,12 @@ import pg from "pg";
 import { connectionString } from "../config.js";
 
 const pool = new pg.Pool({
-  connectionString,
-  ssl: {
-    rejectUnauthorized: false
-  }
+	connectionString,
+	ssl: {
+		rejectUnauthorized: false,
+	},
 });
 
-export default pool;
+export default function query(text, params) {
+	return pool.query(text, params);
+}
