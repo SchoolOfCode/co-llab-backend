@@ -7,7 +7,7 @@
 		"start": "node ./bin/www.js",
 		"db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
 		"db:createuserstable": "node -r dotenv/config ./db/scripts/users/createUsersTable.js",
-		"db:populateusers": "node -r dotenv/config ./db/scripts/users/populateTable.js",
+		"db:populateuserstable": "node -r dotenv/config ./db/scripts/users/populateUsersTable.js",
 		"dev": "nodemon -r dotenv/config ./bin/www.js",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
 	},

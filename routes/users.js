@@ -5,11 +5,11 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
-	//const users = await getAllUsers();
+	const data = await getAllUsers();
 
 	res.json({
 		success: true,
-		payload: "Hello team",
+		payload: data,
 	});
 });
 

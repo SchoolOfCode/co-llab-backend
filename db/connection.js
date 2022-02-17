@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import pg from "pg";
 
 import { connectionString } from "../config.js";
