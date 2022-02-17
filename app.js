@@ -22,12 +22,7 @@ app.use("/users", usersRouter);
 app.use(function (req, res, next) {
 	res
 		.status(404)
-		.json({ message: "We couldn't find what you were looking for 😞" });
-	next();
-});
-
-app.get("/", function (req, res) {
-	res.send("Hello HUGS FOR BUGS!");
+		.json({ message: "We CANNOT find what you were looking for 😞" });
 });
 
 app.use(function (err, req, res, next) {
