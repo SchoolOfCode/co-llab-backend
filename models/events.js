@@ -15,7 +15,7 @@ export async function addEvent(
   type,
   tags,
   // tags is an array - be aware of variables used for SQL injection
-  user_id
+  auth_id
 ) {
   const result = await query(
     `INSERT INTO events(event_name, 
@@ -23,8 +23,9 @@ time,
 address, 
 type, 
 tags,
-user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *; `,
-    [event_name, time, address, type, tags, user_id]
+auth_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *; `,
+    [event_name, time, address, type, tags, auth_id]
   );
   return result.rows;
 }
+

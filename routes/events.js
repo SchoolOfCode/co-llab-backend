@@ -19,9 +19,9 @@ eventsRouter.get("/", async (req, res) => {
 // calling addEvent in try catch to catch any error messages and respond with those to front end
 // else if successful, responds with data
 eventsRouter.post("/", async (req, res) => {
-  const { event_name, time, address, type, tags, user_id } = req.body;
+  const { event_name, time, address, type, tags, auth_id } = req.body;
   try {
-    const data = await addEvent(event_name, time, address, type, tags, user_id);
+    const data = await addEvent(event_name, time, address, type, tags, auth_id);
     return res.json({
       success: true,
       payload: data,

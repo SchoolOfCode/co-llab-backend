@@ -8,7 +8,8 @@
     "db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
     "db:createusers": "node -r dotenv/config ./db/scripts/users/createTable.js",
     "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateTable.js",
-    "db:droptable": "node -r dotenv/config ./db/scripts/users/dropTable.js",
+    "db:dropuserstable": "node -r dotenv/config ./db/scripts/users/dropTable.js",
+    "db:dropeventstable": "node -r dotenv/config ./db/scripts/events/dropTable.js",
     "db:createevents": "node -r dotenv/config ./db/scripts/events/createEventsTable.js",
     "dev": "nodemon -r dotenv/config ./bin/www.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
