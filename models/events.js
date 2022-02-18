@@ -1,8 +1,13 @@
 import { query } from "../db/connection.js";
 
+// be able to get all data from this current date onwards - display on the Events page
+export async function getEventsfromToday() {
+  const result = await query(`SELECT * FROM events WHERE time > now()::date;`);
+  return result.rows;
+}
+
 // be able to pass data from front end to the database
 // ensure we are returning data
-
 export async function addEvent(
   event_name,
   time,

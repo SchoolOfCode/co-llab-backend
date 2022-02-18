@@ -1,23 +1,33 @@
 import express from "express";
-import { getAllUsers } from "../models/users.js";
+import { addUser, getEventsByUserId } from "../models/users.js";
 
-const router = express.Router();
-
-/* GET users listing. */
-// router.get("/", async function (req, res, next) {
-//   const users = await getAllUsers();
-
-//   res.json({
-//     success: true,
-//     payload: users
-//   });
-// });
-
-router.get("/", function (req, res, next) {
-	res.json({
-		success: true,
-		msg: "Hello hugs for bugs",
-	});
+const usersRouter = express.Router();
+// get events according to user id
+usersRouter.get("/", async (req, res) => {
+  const { user_id } = req.body;
+  try {
+    const data = await getEventsByUserId(user_id);
+    res.json({
+      sucess: true,
+      payload: data,
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error.toString() });
+  }
 });
 
-export default router;
+// add user against event chosen to attend
+usersRouter.post("/", async (req, res) => {
+  const { user_id, event_attend } = req.body;
+  try {
+    const data = await addUser(user_id, event_attend);
+    res.json({
+      sucess: true,
+      payload: data,
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error.toString() });
+  }
+});
+// add a delete for user if they chose to not attend
+export default usersRouter;
