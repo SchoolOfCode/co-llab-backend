@@ -45,7 +45,7 @@ describe('POST /events', function () {
                 // ACT 
                 const expected = {
                     success: true,
-                    payload: expect.arrayContaining([{
+                    payload: expect.objectContaining({
                         event_id: expect.any(String),
                         event_name: expect.any(String),
                         time: expect.any(String),
@@ -54,8 +54,10 @@ describe('POST /events', function () {
                         type: expect.any(String),
                         tags: expect.any(Array),
                         auth_id: expect.any(String)
-                    }])
+                    })
                 }
+                // ASSERT
+                expect(actual).toStrictEqual(expected);
             })
     })
 })
