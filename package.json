@@ -12,7 +12,7 @@
     "db:dropeventstable": "node -r dotenv/config ./db/scripts/events/dropTable.js",
     "db:createevents": "node -r dotenv/config ./db/scripts/events/createEventsTable.js",
     "dev": "nodemon -r dotenv/config ./bin/www.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node -r dotenv/config --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "jest": "^27.5.1",
     "nodemon": "^2.0.15",
-    "jest": "^27.4.5",
-    "supertest": "^6.1.6"
+    "supertest": "^6.2.2"
   }
 }

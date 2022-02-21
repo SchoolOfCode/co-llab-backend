@@ -7,7 +7,7 @@ eventsRouter.get("/", async (req, res) => {
   try {
     const data = await getEventsfromToday();
     res.json({
-      sucess: true,
+      success: true,
       payload: data,
     });
   } catch (error) {
