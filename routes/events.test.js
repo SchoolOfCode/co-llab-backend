@@ -8,13 +8,13 @@ import { getEventsfromToday, addEvent } from "../models/events";
 
 describe('GET /events', function () {
     it("should return a payload with an array of objects in the response body", async () => {
-        // ARRANGE
+        // ACT
         const actual = await getEventsfromToday();
         request(eventsRouter)
             .get('/')
             .expect(200)
             .expect((res) => {
-                // ACT
+                // ARRANGE
                 const expected = {
                     success: true,
                     payload: expect.arrayContaining([{
