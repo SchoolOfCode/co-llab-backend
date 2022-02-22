@@ -34,7 +34,7 @@ export async function removeUserFromEvent(auth_id, event_id) {
   );
 }
 
-export async function getAllEvents() {
+export async function getAllUsers() {
   const result = await query(
     `SELECT * FROM users;`
   );
