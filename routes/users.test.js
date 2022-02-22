@@ -7,7 +7,7 @@ import {
 } from "../models/users";
 
 describe("testing our HTTP requests at /users", function () {
-	// Testing that the response object contains an array of objects (events)
+	// Testing that the response object contains an array of objects (users)
 	it("should return an array of objects containing all users when listening to a GET request", async () => {
 		// ACT
 		const actual = await getAllUsers();
