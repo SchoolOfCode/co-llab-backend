@@ -1,16 +1,16 @@
 import pg from "pg";
+import "dotenv/config";
 
 import { connectionString } from "../config.js";
 
 const pool = new pg.Pool({
-  connectionString,
-  ssl: {
-    rejectUnauthorized: false
-  }
+	connectionString,
+	ssl: {
+		rejectUnauthorized: false,
+	},
 });
 
-// Query function constructor 
+// Query function constructor
 export async function query(text, params) {
-  return pool.query(text, params);
+	return pool.query(text, params);
 }
-
