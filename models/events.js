@@ -2,8 +2,14 @@ import { query } from "../db/connection.js";
 
 // be able to get all data from this current date onwards - display on the Events page
 export async function getEventsfromToday() {
-	const result = await query(`SELECT * FROM events WHERE time > now()::date;`);
-	return result.rows;
+  const result = await query(
+    `SELECT * FROM events WHERE event_date > now()::date;`
+  );
+  return result.rows;
+}
+export async function getAllEvents() {
+  const result = await query(`SELECT * FROM events`);
+  return result.rows;
 }
 
 // be able to pass data from front end to the database
@@ -30,17 +36,17 @@ export async function getEventsfromToday() {
 // }
 
 export async function addEvent(
-	event_desc,
-	event_date,
-	event_start_time,
-	event_end_time,
-	event_location,
-	event_type,
-	event_tags,
-	auth_id
+  event_desc,
+  event_date,
+  event_start_time,
+  event_end_time,
+  event_location,
+  event_type,
+  event_tags,
+  auth_id
 ) {
-	const result = await query(
-		`INSERT INTO events(
+  const result = await query(
+    `INSERT INTO events(
       event_desc,
       event_date,
       event_start_time,
@@ -50,16 +56,16 @@ export async function addEvent(
       event_tags,
       auth_id
 ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *; `,
-		[
-			event_desc,
-			event_date,
-			event_start_time,
-			event_end_time,
-			event_location,
-			event_type,
-			event_tags,
-			auth_id,
-		]
-	);
-	return result.rows;
+    [
+      event_desc,
+      event_date,
+      event_start_time,
+      event_end_time,
+      event_location,
+      event_type,
+      event_tags,
+      auth_id,
+    ]
+  );
+  return result.rows;
 }
