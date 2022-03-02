@@ -3,7 +3,7 @@ import { query } from "../db/connection.js";
 // be able to get all data from this current date onwards - display on the Events page
 export async function getEventsfromToday() {
   const result = await query(
-    `SELECT * FROM events WHERE event_date > now()::date;`
+    `SELECT * FROM events WHERE event_date > now()::date ORDER BY event_date ASC;`
   );
   return result.rows;
 }
