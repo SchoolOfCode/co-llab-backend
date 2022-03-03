@@ -69,3 +69,18 @@ export async function addEvent(
   );
   return result.rows;
 }
+
+export async function getAttendees() {
+  const result = await query(
+    `SELECT events.*, 
+      COUNT(event_attend)
+      FROM users 
+      RIGHT JOIN events 
+      on users.event_attend = events.event_id
+      WHERE events.event_date > now()::date
+      GROUP BY events.event_id 
+      ORDER BY events.event_date ASC
+      ;`
+  );
+  return result.rows;
+}

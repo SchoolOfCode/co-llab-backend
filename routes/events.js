@@ -3,13 +3,14 @@ import {
   addEvent,
   getEventsfromToday,
   getAllEvents,
+  getAttendees,
 } from "../models/events.js";
 
 const eventsRouter = express.Router();
 
 eventsRouter.get("/", async (req, res) => {
   try {
-    const data = await getEventsfromToday();
+    const data = await getAttendees();
     res.json({
       success: true,
       payload: data,
@@ -31,6 +32,17 @@ eventsRouter.get("/all", async (req, res) => {
   }
 });
 
+// eventsRouter.get("/attendees", async (req, res) => {
+//   try {
+//     const data = await getAttendees();
+//     res.json({
+//       success: true,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     return res.status(400).json({ error: error.toString() });
+//   }
+// });
 // using addEvent function to add data to DB
 // calling addEvent in try catch to catch any error messages and respond with those to front end
 // else if successful, responds with data
