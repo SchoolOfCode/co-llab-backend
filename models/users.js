@@ -18,7 +18,8 @@ export async function getEventsByUserId(auth_id) {
  FROM users
  LEFT JOIN events 
  on users.event_attend = events.event_id
- WHERE events.auth_id = $1 AND events.event_date > now()::date;`,
+ WHERE events.auth_id = $1 AND events.event_date > now()::date 
+ ORDER BY event_date ASC;`,
     [auth_id]
   );
   return result.rows;
