@@ -15,10 +15,10 @@ export async function getEventsByUserId(auth_id) {
   console.log(auth_id);
   const result = await query(
     `SELECT *
- FROM users
- LEFT JOIN events 
+ FROM events
+ LEFT JOIN users 
  on users.event_attend = events.event_id
- WHERE events.auth_id = $1 AND events.event_date > now()::date 
+ WHERE users.auth_id = $1 AND events.event_date > now()::date 
  ORDER BY event_date ASC;`,
     [auth_id]
   );
