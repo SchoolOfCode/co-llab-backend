@@ -91,9 +91,79 @@ export async function getAttendees() {
   return result.rows;
 }
 
-export async function getEventsByUserId(auth_id) {
+export async function getEventsCreatedByUser(auth_id) {
   const result = await query(`SELECT * FROM events WHERE auth_id = $1`, [
     auth_id,
   ]);
+  return result.rows;
+}
+export async function getEventsNotAttendedByUser(auth_id) {
+  const result = await query(
+    `with v1 AS (SELECT event_attend 
+    FROM users 
+    WHERE auth_id = $1)
+    SELECT * FROM events 
+    WHERE event_id NOT IN (select event_attend from v1) AND events.event_date > now()::date
+    ORDER BY event_date ASC;`,
+    [auth_id]
+  );
+  return result.rows;
+}
+
+// events.event_date > now()::date
+// get all events (event_attend) that the user is currently attending from users table
+
+// SELECT event_attend FROM users WHERE user.auth_id = $1
+
+// go the events table and remove all (event_ids that match event_attend)
+
+// SELECT * FROM events WHERE events.event_id <> event_attend (from above)
+
+// return all events from events table
+
+export async function deleteEvent(event_id, auth_id) {
+  const result = await query(
+    `DELETE FROM events WHERE event_id = $1, auth_id = $2;`,
+    [event_id, auth_id]
+  );
+}
+
+export async function updateEvent(
+  event_id,
+  event_desc,
+  event_date,
+  event_start_time,
+  event_end_time,
+  event_location,
+  event_type,
+  event_tags,
+  first_name,
+  last_name
+) {
+  const result = await query(
+    `UPDATE events SET
+      event_desc = $1,
+      event_date = $2,
+      event_start_time = $3,
+      event_end_time = $4,
+      event_location = $5,
+      event_type= $6,
+      event_tags= $7,
+      first_name = $8,
+      last_name = $9
+      WHERE event_id = $10 RETURNING *; `,
+    [
+      event_desc,
+      event_date,
+      event_start_time,
+      event_end_time,
+      event_location,
+      event_type,
+      event_tags,
+      first_name,
+      last_name,
+      event_id,
+    ]
+  );
   return result.rows;
 }
