@@ -43,7 +43,9 @@ export async function addEvent(
   event_location,
   event_type,
   event_tags,
-  auth_id
+  auth_id,
+  first_name,
+  last_name
 ) {
   const result = await query(
     `INSERT INTO events(
@@ -54,8 +56,10 @@ export async function addEvent(
       event_location,
       event_type,
       event_tags,
-      auth_id
-) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *; `,
+      auth_id,
+      first_name,
+      last_name
+) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *; `,
     [
       event_desc,
       event_date,
@@ -65,6 +69,8 @@ export async function addEvent(
       event_type,
       event_tags,
       auth_id,
+      first_name,
+      last_name,
     ]
   );
   return result.rows;
@@ -82,5 +88,12 @@ export async function getAttendees() {
       ORDER BY events.event_date ASC
       ;`
   );
+  return result.rows;
+}
+
+export async function getEventsByUserId(auth_id) {
+  const result = await query(`SELECT * FROM events WHERE auth_id = $1`, [
+    auth_id,
+  ]);
   return result.rows;
 }
