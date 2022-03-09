@@ -123,7 +123,7 @@ export async function getEventsNotAttendedByUser(auth_id) {
 
 export async function deleteEvent(event_id, auth_id) {
   const result = await query(
-    `DELETE FROM events WHERE event_id = $1, auth_id = $2;`,
+    `DELETE FROM events WHERE event_id = $1 AND auth_id = $2;`,
     [event_id, auth_id]
   );
 }

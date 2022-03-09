@@ -113,6 +113,7 @@ eventsRouter.post("/", async (req, res) => {
 });
 
 eventsRouter.delete("/", async (req, res) => {
+  console.log(req.body);
   const { event_id, auth_id } = req.body;
   try {
     const data = await deleteEvent(event_id, auth_id);
