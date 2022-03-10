@@ -10,7 +10,19 @@
 
 import { query } from "../../connection.js";
 
-const sqlString = `CREATE TABLE IF NOT EXISTS events (event_id SERIAL PRIMARY KEY,event_desc TEXT, event_date DATE, event_start_time TIME, event_end_time TIME, event_location VARCHAR, event_type TEXT, event_tags TEXT[], auth_id VARCHAR, first_name VARCHAR, last_name VARCHAR);`;
+const sqlString = `CREATE TABLE IF NOT EXISTS events (event_id SERIAL PRIMARY KEY,
+  event_desc TEXT, 
+  event_date DATE, 
+  event_start_time TIME, 
+  event_end_time TIME, 
+  event_location VARCHAR, 
+  event_type TEXT, 
+  event_tags TEXT[], 
+  auth_id VARCHAR, 
+  first_name VARCHAR, 
+  last_name VARCHAR,
+  UNIQUE(event_desc, event_date, event_start_time, event_end_time, event_location, event_type, event_tags, auth_id, first_name,last_name)
+  );`;
 
 export async function createEventsTable() {
   const res = await query(sqlString);

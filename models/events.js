@@ -102,8 +102,13 @@ export async function getEventsNotAttendedByUser(auth_id) {
     `with v1 AS (SELECT event_attend 
     FROM users 
     WHERE auth_id = $1)
-    SELECT * FROM events 
+    SELECT events.*, 
+      COUNT(event_attend)
+      FROM users 
+      RIGHT JOIN events 
+      on users.event_attend = events.event_id
     WHERE event_id NOT IN (select event_attend from v1) AND events.event_date > now()::date
+    GROUP BY events.event_id 
     ORDER BY event_date ASC;`,
     [auth_id]
   );
